@@ -1,0 +1,24 @@
+﻿@model EventsViewModels
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detail</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.HiddenFor(model => model.EventId)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.DateCreated)
+        @Html.HiddenFor(model => model.IsActive)
+
+        Name:
+        @Html.EditorFor(model => model.EventName)
+        Start Date:
+        @Html.EditorFor(model => model.StartDate)
+        End Date:
+        @Html.EditorFor(model => model.EndDate)
+    </div>
+    <button type="submit">Accept Challenge</button>
+}

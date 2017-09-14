@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Sports>
+
+@{
+    ViewBag.Title = "Sports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (WebApp.HelperClass.Common.CurrentUser.IsSuperAdmin)
+{
+    <a href="/Sports/Detail">Add Sport</a>
+}
+
+@if (Model != null && Model.Count() > 0)
+{
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-2">
+                    <b>Sports Name</b>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    foreach (var item in Model)
+    {
+        @Html.HiddenFor(model => item.SportId)
+
+        if (WebApp.HelperClass.Common.CurrentUser.IsSuperAdmin)
+        {
+            <a href="/Sports/Detail/@item.SportId" class="btn btn-outline pull-right animated tada">Edit</a>
+            <a href="/Sports/Delete/@item.SportId" class="btn btn-outline pull-right animated tada" onclick="return confirm('Are you sure you want to delete?');">Delete</a>
+        }
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2">
+                        @Html.DisplayFor(model => item.SportName)
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

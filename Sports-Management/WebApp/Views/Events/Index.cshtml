@@ -1,0 +1,122 @@
+﻿@model IEnumerable<EventsViewModels>
+@{
+    ViewBag.Title = "Events";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <a href="/Events/Detail">Add Event</a>
+    if (Model != null && Model.Count() > 0)
+    {
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2">
+                        <b>Event Name</b>
+                    </div>
+                    <div class="col-md-2">
+                        <b>Sport Name</b>
+                    </div>
+                    <div class="col-md-2">
+                        <b>Venue Name</b>
+                    </div>
+                    <div class="col-md-2">
+                        <b>Start Date</b>
+                    </div>
+                    <div class="col-md-2">
+                        <b>End Date</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        foreach (var item in Model)
+        {
+            @Html.HiddenFor(model => item.EventId)
+            if (item.UserId == WebApp.HelperClass.Common.CurrentUser.Id)
+            {
+                <a href="/Events/Detail/@item.EventId" class="btn btn-outline pull-right animated tada">Edit</a>
+                <a href="/Events/Delete/@item.EventId" class="btn btn-outline pull-right animated tada" onclick="return confirm('Are you sure you want to delete?');">Delete</a>
+                <a href='@Url.Action("ChallengeUsers", "Events", new { id = item.EventId })' data-toggle="modal" data-target="#modal-container" class="btn btn-outline pull-right animated tada"> Challenge </a>
+            }
+            else
+            {
+                if (!item.IsFree && item.TotalBoughtTickets < item.TotalTicketAllowed)
+                {
+                    <a href="/Events/Challenge/@item.EventId" data-toggle="modal" class="btn btn-outline pull-right animated tada"> Buy Ticket </a>
+                }
+                else if (!item.IsFree && item.TotalBoughtTickets >= item.TotalTicketAllowed)
+                {
+                    <a href="#" data-toggle="modal" class="btn btn-outline pull-right animated tada"> Sold Out </a>
+                }
+                else if (item.IsFree)
+                {
+                    <a href="#" data-toggle="modal" class="btn btn-outline pull-right animated tada"> Free </a>
+                }
+            }
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.DisplayFor(model => item.EventName)
+                        </div>
+                        <div class="col-md-2">
+                            @Html.DisplayFor(model => item.SportName)
+                        </div>
+                        <div class="col-md-2">
+                            @Html.DisplayFor(model => item.VenueName)
+                        </div>
+                        <div class="col-md-2">
+                            @Html.DisplayFor(model => item.StartDate)
+                        </div>
+                        <div class="col-md-2">
+                            @Html.DisplayFor(model => item.EndDate)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+    <div class="modal inmodal" id="modal-container" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+            </div>
+        </div>
+    </div>
+
+<script>
+
+    @*$('#save').click(function () {
+        var allVals = [];
+        $("input:checkbox:checked").each(function () {
+            if($(this).hasClass("check-all") || $(this).hasClass("check-group"))
+            {
+            }else{
+                allVals.push($(this).val());
+            }
+        });
+        var values = $(this).serialize();
+
+        $.ajax({
+            url: '@Url.Action("SaveRolePermissions")',
+            type: "post",
+            data: { values: allVals , id:@ViewContext.RouteData.Values["id"]},
+            success: function (response) {
+                // you will get response from your php page (what you echo or print)
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    });
+
+    $('.check-all').on("click",function(){
+        $('.ibox-content').find(':checkbox').prop('checked', this.checked);
+    });*@
+
+</script>

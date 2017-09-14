@@ -1,0 +1,22 @@
+﻿
+@model Venues
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detail</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.HiddenFor(model => model.VenueId)
+        @Html.HiddenFor(model => model.IsReserved)
+        @Html.HiddenFor(model => model.IsActive)
+
+        Name:
+        @Html.EditorFor(model => model.VenueName)
+        Address:
+        @Html.EditorFor(model => model.Address)
+    </div>
+    <button type="submit">Save</button>
+}

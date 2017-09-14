@@ -1,0 +1,20 @@
+﻿
+@model Sports
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detail</h2>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.HiddenFor(model => model.SportId)
+        @Html.HiddenFor(model => model.IsActive)
+        @Html.HiddenFor(model => model.DateCreated)
+
+        Name:
+        @Html.EditorFor(model => model.SportName)
+    </div>
+    <button type="submit">Save</button>
+}

@@ -1,0 +1,187 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Row start -->
+<div class="row">
+    <!--Input Groups Form starts-->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-header-text">Input Groups & Addon</h5>
+                <div class="f-right">
+                    <a href="" data-toggle="modal" data-target="#input-addon-Modal"><i class="icofont icofont-code-alt"></i></a>
+                </div>
+            </div>
+            <!-- end of modal -->
+
+            <div class="card-block">
+                <p class="m-b-20">
+                    Extend form controls by adding text or buttons before, after, or on both sides of any text-based <code>&lt;input&gt;</code>. Use <code>.input-group</code> with an <code>.input-group-addon</code> or <code>.input-group-btn</code> to prepend or append elements to a single <code>.form-control</code>.
+                </p>
+                <form class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group row">
+                            <div class="col-md-2"><label class="col-form-label f-w-600" for="alighaddon2">Align</label></div>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="alighaddon1"></span>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2"><label class="sr-only" for="alighaddon2">Align addon</label></div>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <input type="number" id="alighaddon2" class="form-control" placeholder="Percentage" aria-describedby="basic-addon2">
+                                    <span class="input-group-addon" id="basic-addon2">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2"><label class="sr-only" for="alighaddon3">Align addon</label></div>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon3.1">$</span>
+                                    <input type="text" class="form-control" id="alighaddon3" placeholder="Amount">
+                                    <span class="input-group-addon" id="basic-addon3.2">.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2"><label for="iconaddon1" class="col-form-label f-w-600">Icon</label></div>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="icofont icofont-email"></i></span>
+                                    <input type="email" class="form-control" id="iconaddon1" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2"><label class="sr-only">Icon addon</label></div>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <input type="text" id="iconaddon12" class="form-control" placeholder="Username">
+                                    <span class="input-group-addon"><i class="icofont icofont-ui-user"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2"><label for="iconaddon3" class="sr-only">Icon addon</label></div>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="icon-addon3.1"><i class="icofont icofont-thumbs-up"></i></span>
+                                    <input type="text" id="iconaddon3" class="form-control" placeholder="Details" aria-describedby="icon-addon3.1">
+                                    <span class="input-group-addon" id="icon-addon3.2"><i class="icofont icofont-thumbs-down"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group row">
+                            <div class="col-md-2"><label class="col-form-label f-w-600">Dropdown</label></div>
+                            <div class="col-md-10">
+                                <div class="input-group" id="dropdown1">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-danger shadow-none addon-btn waves-effect waves-light dropdown-toggle addon-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <div role="separator" class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Separated link</a>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2"><label class="sr-only">Dropdown</label></div>
+                            <div class="col-md-10">
+                                <div class="input-group" id="dropdown2">
+                                    <input type="text" class="form-control" placeholder="Username">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-info shadow-none addon-btn waves-effect waves-light dropdown-toggle addon-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <div role="separator" class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Separated link</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2"><label class="sr-only">Dropdown addon</label></div>
+                            <div class="col-md-10">
+                                <div class="input-group" id="dropdown3">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-success addon-btn shadow-none waves-effect waves-light dropdown-toggle addon-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <div role="separator" class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Separated link</a>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-primary addon-btn shadow-none waves-effect waves-light dropdown-toggle addon-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <div role="separator" class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Separated link</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2"><label for="btnaddon1" class="col-form-label f-w-600">Button</label></div>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-btn" id="btn-addon1"><button type="submit" class="btn btn-info shadow-none addon-btn waves-effect waves-light">Go!</button></span>
+                                    <input type="text" id="btnaddon1" class="form-control" placeholder="Username" aria-describedby="btn-addon1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2"><label for="btnaddon2" class="sr-only">Button addon</label></div>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <input id="btnaddon2" type="text" class="form-control" placeholder="Username" aria-describedby="btn-addon2">
+                                    <span class="input-group-btn" id="btn-addon2"><button type="submit" class="btn btn-warning shadow-none addon-btn waves-effect waves-light">Go!</button></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-2"><label for="btnaddon3" class="sr-only">Button addon</label></div>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-btn" id="btn-addon3.1"><button type="submit" class="btn btn-primary shadow-none addon-btn waves-effect waves-light">Search!</button></span>
+                                    <input id="btnaddon3" type="text" class="form-control" placeholder="Username" aria-describedby="btn-addon3.1">
+                                    <span class="input-group-btn" id="btn-addon3.2"><button type="submit" class="btn btn-success shadow-none addon-btn waves-effect waves-light">Go!</button></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--Input Groups Form ends-->
+</div>
+<!-- Row end -->
