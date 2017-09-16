@@ -7,9 +7,11 @@ using AutoMapper;
 using WebApp.ViewModels;
 using System.Web;
 using System.Collections.Generic;
+using WebApp.Helpers;
 
 namespace WebApp.Controllers
 {
+    [SuperAdminAuthorizeAttribute]
     public class UserController : BaseController
     {
         UsersManager _usermanager;

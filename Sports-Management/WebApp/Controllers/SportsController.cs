@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApp.Helpers;
 using WebApp.Models;
 using WebApp.Services;
 
@@ -30,7 +31,7 @@ namespace WebApp.Controllers
             model = _sportsService.Queryable().data;
             return View(model);
         }
-
+        [SuperAdminAuthorizeAttribute]
         public ActionResult Detail(int id = 0)
         {
             Result<Sports> model = new Result<Sports>();
@@ -42,7 +43,7 @@ namespace WebApp.Controllers
 
             return View(model.data);
         }
-
+        [SuperAdminAuthorizeAttribute]
         [HttpPost]
         public ActionResult Detail(Sports model)
         {
@@ -61,7 +62,7 @@ namespace WebApp.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [SuperAdminAuthorizeAttribute]
         public ActionResult Delete(int id)
         {
             var result = _sportsService.Delete(id);

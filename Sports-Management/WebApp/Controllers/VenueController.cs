@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApp.Helpers;
 using WebApp.Models;
 using WebApp.Services;
 
@@ -31,7 +32,7 @@ namespace WebApp.Controllers
 
 
 
-
+        [SuperAdminAuthorizeAttribute]
         public ActionResult Detail(int id = 0)
         {
             Result<Venues> model = new Result<Venues>();
@@ -44,6 +45,7 @@ namespace WebApp.Controllers
             return View(model.data);
         }
 
+        [SuperAdminAuthorizeAttribute]
         [HttpPost]
         public ActionResult Detail(Venues model)
         {
@@ -62,7 +64,7 @@ namespace WebApp.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [SuperAdminAuthorizeAttribute]
         public ActionResult Delete(int id)
         {
             var result = _venueService.Delete(id);
