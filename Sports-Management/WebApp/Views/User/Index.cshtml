@@ -6,66 +6,50 @@
 }
 
 
-@if (Model != null && Model.Count() > 0)
-{
+<div class="col-md-12">
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-2">
-                    <b>Name</b>
-                </div>
-                <div class="col-md-2">
-                    <b>User Name</b>
-                </div>
-                <div class="col-md-2">
-                    <b>Email</b>
-                </div>
-                <div class="col-md-2">
-                    <b>Address</b>
-                </div>
-                <div class="col-md-2">
-                    <b>Date Created</b>
-                </div>
-                
-            </div>
+    <div class="card">
+        <div class="card-header m-b-md">
+            <h5 class="card-header-text">Users List</h5>
+        </div>
+        <div class="card-block">
+            @if (Model != null && Model.Count() > 0)
+            {
+                <table class="table table-hover snap-primary-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>UserName</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Created Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            @Html.HiddenFor(model => item.Id)
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.UserName</td>
+                                <td>@item.Email</td>
+                                <td>@item.Address</td>
+                                <td>@item.DateCreated.ToShortDateString()</td>
+
+                                <td>
+                                    <a class="grid_action" href="@Url.Action("Activate", "User", new { id = item.Id })" onclick="return confirm('Are you sure you want to Activate?');"
+                                        title="Activate User"><i class="fa fa-unlock"></i> </a>|
+                                    <a class="grid_action" href="@Url.Action("Delete", "User", new { id = item.Id })" onclick="return confirm('Are you sure you want to De-Activate?');"
+                                       title="Block User"><i class="fa fa-lock"></i></a>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
         </div>
     </div>
+</div>
 
-    foreach (var item in Model)
-    {
-
-        if (item.IsActive)
-        {
-            <a href="/User/Delete/@item.Id" class="btn btn-outline pull-right animated tada" onclick="return confirm('Are you sure you want to block?');">Block User</a>
-        }
-        else
-        {
-            <a href="/User/Activate/@item.Id" class="btn btn-outline pull-right animated tada" onclick="return confirm('Are you sure you want to activate?');">Activate User</a>
-        }
-
-
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-2">
-                        @Html.DisplayFor(model => item.Name)
-                    </div>
-                    <div class="col-md-2">
-                        @Html.DisplayFor(model => item.UserName)
-                    </div>
-                    <div class="col-md-2">
-                        @Html.DisplayFor(model => item.Email)
-                    </div>
-                    <div class="col-md-2">
-                        @Html.DisplayFor(model => item.Address)
-                    </div>
-                    <div class="col-md-2">
-                        @Html.DisplayFor(model => item.DateCreated)
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-}

@@ -4,42 +4,52 @@
     ViewBag.Title = "Sports";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="col-md-12">
 
-@if (WebApp.HelperClass.Common.CurrentUser.IsSuperAdmin)
-{
-    <a href="/Sports/Detail">Add Sport</a>
-}
-
-@if (Model != null && Model.Count() > 0)
-{
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-2">
-                    <b>Sports Name</b>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-header m-b-md">
+            <h5 class="card-header-text">Sports List</h5>
+            @if (WebApp.HelperClass.Common.CurrentUser.IsSuperAdmin)
+            {
+                <a href="/Sports/Detail" class="btn btn-sm btn-primary pull-right"><i class="fa fa-plus"></i> Add Sport</a>
+            }
+        </div>
+        <div class="card-block">
+            @if (Model != null && Model.Count() > 0)
+            {
+                <table class="table table-hover snap-primary-table">
+                    <thead>
+                        <tr>
+                            <th>Sports Name</th>
+                            <th>Created Date</th>
+                            @if (WebApp.HelperClass.Common.CurrentUser.IsSuperAdmin)
+                            {
+                                <th>Actions</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            @Html.HiddenFor(model => item.SportId)
+                            <tr>
+                                <td>@item.SportName</td>
+                                <td>@item.DateCreated.ToShortDateString()</td>
+                                @if (WebApp.HelperClass.Common.CurrentUser.IsSuperAdmin)
+                                {
+                                    <td>
+                                        <a class="grid_action" href="@Url.Action("Detail", "Sports", new { id = item.SportId })" title="Edit"><i class="fa fa-edit"></i> </a>|
+                                        <a class="grid_action" href="@Url.Action("Delete", "Sports", new { id = item.SportId })" onclick="return confirm('Are you sure you want to delete?');"
+                                           title="Delete"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
         </div>
     </div>
+</div>
 
-    foreach (var item in Model)
-    {
-        @Html.HiddenFor(model => item.SportId)
 
-        if (WebApp.HelperClass.Common.CurrentUser.IsSuperAdmin)
-        {
-            <a href="/Sports/Detail/@item.SportId" class="btn btn-outline pull-right animated tada">Edit</a>
-            <a href="/Sports/Delete/@item.SportId" class="btn btn-outline pull-right animated tada" onclick="return confirm('Are you sure you want to delete?');">Delete</a>
-        }
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-2">
-                        @Html.DisplayFor(model => item.SportName)
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-}

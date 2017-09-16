@@ -8,7 +8,7 @@
             <!-- Navbar Right Menu-->
             <div class="navbar-custom-menu">
                 <ul class="top-nav">
-                    @if (Request.Url.ToString().ToLower().Contains("/home/") || ViewContext.RouteData.Values["controller"].ToString().ToLower().Equals("home"))
+                    @*@if (Request.Url.ToString().ToLower().Contains("/home/") || ViewContext.RouteData.Values["controller"].ToString().ToLower().Equals("home"))
                     {
                         <li class="active">
                             <a href="~/Home/Index"><i class="fa fa-home"></i><span class="nav-label">Home</span></a>
@@ -19,18 +19,18 @@
                         <li>
                             <a href="~/Home/Index"><i class="fa fa-home"></i><span class="nav-label">Home</span></a>
                         </li>
-                    }
+                    }*@
 
-                    @if (Request.Url.ToString().ToLower().Contains("/events"))
+                    @if (Request.Url.ToString().ToLower().Contains("/events") || Request.Url.ToString().ToLower().Contains("/home/") || ViewContext.RouteData.Values["controller"].ToString().ToLower().Equals("home"))
                     {
                         <li class="active">
-                            <a href="~/Events/Index"><i class="fa fa-calendar"></i> <span class="nav-label">Events</span></a>
+                            <a href="~/Events/Index"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
                         </li>
                     }
                     else
                     {
                         <li>
-                            <a href="~/Events/Index"><i class="fa fa-calendar"></i> <span class="nav-label">Events</span></a>
+                            <a href="~/Events/Index"><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
                         </li>
                     }
 
