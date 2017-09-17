@@ -2,6 +2,7 @@
 using Repository.Pattern.Ef6;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -53,10 +54,16 @@ namespace WebApp.Models
         [Display(Name = "Profile Picture")]
         public string ProfilePic { get; set; }
         [Display(Name="Team Registration")]
+        [DefaultValue(false)]
         public bool IsTeam { get; set; }
         [Display(Name = "Total Members")]
         public int? TotalMembers { get; set; }
         public bool IsSuperAdmin { get; set; }
+        [Display(Name = "Free Event")]
+        [DefaultValue(true)]
+        public bool IsFree { get; set; }
+        [Display(Name = "Total Tickets")]
+        public int? TotalTickets { get; set; }
         public void Dispose()
         {
 

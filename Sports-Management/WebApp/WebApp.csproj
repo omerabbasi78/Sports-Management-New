@@ -297,6 +297,10 @@
     <Compile Include="Migrations\201709140619342_InitialMigration.Designer.cs">
       <DependentUpon>201709140619342_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709170908356_SecongMigration.cs" />
+    <Compile Include="Migrations\201709170908356_SecongMigration.Designer.cs">
+      <DependentUpon>201709170908356_SecongMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Events.cs" />
     <Compile Include="Models\Notifications.cs" />
@@ -330,7 +334,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\js\menu.js" />
+    <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\generic-class.css" />
+    <Content Include="Content\css\parallax.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\css\svg-weather.css" />
     <Content Include="Content\js\jquery.slimscroll.js" />
     <Content Include="Content\js\jquery.slimscroll.min.js" />
@@ -495,6 +502,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709140619342_InitialMigration.resx">
       <DependentUpon>201709140619342_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709170908356_SecongMigration.resx">
+      <DependentUpon>201709170908356_SecongMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
