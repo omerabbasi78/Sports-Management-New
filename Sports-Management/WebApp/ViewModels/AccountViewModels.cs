@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.ViewModels
@@ -106,6 +107,11 @@ namespace WebApp.ViewModels
         public int TotalMembers { get; set; }
         [Display(Name = "Last Login")]
         public DateTime? LastLogin { get; set; }
+        [Display(Name = "Free Event")]
+        [DefaultValue(true)]
+        public bool IsFree { get; set; }
+        [Display(Name = "Total Tickets")]
+        public int? TotalTickets { get; set; }
     }
 
     public class ResetPasswordViewModel
