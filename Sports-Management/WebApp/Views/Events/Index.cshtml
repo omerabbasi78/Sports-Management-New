@@ -42,36 +42,30 @@
                                     <td>
                                         <a class="grid_action" href="@Url.Action("Detail", "Events", new { id = item.EventId })" title="Edit"><i class="fa fa-pencil"></i></a>|
                                         <a class="grid_action" href="@Url.Action("ChallengeUsers", "Events", new { id = item.EventId })" data-toggle="modal" data-target="#modal-container" title="Challenge Opponents"><i class="fa fa-bullhorn"></i> </a>|
-                                        <a class="grid_action" href="@Url.Action("Delete", "Events", new { id = item.EventId })" data-toggle="modal" data-target="#modal-container"
-                                           onclick="return confirm('Are you sure you want to delete?');" title="Delete"><i class="fa fa-trash"></i></a>
+                                        <a class="grid_action" href="@Url.Action("Delete", "Events", new { id = item.EventId })" onclick="return confirm('Are you sure you want to delete?');" title="Delete"><i class="fa fa-trash"></i></a>
                                     </td>
                                 }
                                 else
                                 {
-                                    if (!item.IsFree && item.TotalBoughtTickets < item.TotalTicketAllowed)
+                                    if (!item.IsFree && item.TotalBoughtTickets < item.TotalTickets)
                                     {
                                         <td>
                                             <a class="grid_action" href="@Url.Action("Challenge", "Events", new { id = item.EventId })" data-toggle="modal" title="Buy Ticket"><i class="fa fa-ticket"></i></a>
                                         </td>
-                                        @*<a href="/Events/Challenge/@item.EventId" data-toggle="modal" class="btn btn-outline pull-right animated tada"> Buy Ticket </a>*@
                                     }
-                                    else if (!item.IsFree && item.TotalBoughtTickets >= item.TotalTicketAllowed)
+                                    else if (!item.IsFree && item.TotalBoughtTickets >= item.TotalTickets)
                                     {
                                         <td>
                                             <a class="grid_action" href="#" title="Sold Out"><i class="fa fa-gavel"></i></a>
                                         </td>
-                                        @*<a href="#" data-toggle="modal" class="btn btn-outline pull-right animated tada"> Sold Out </a>*@
                                     }
                                     else if (item.IsFree)
                                     {
                                         <td>
-                                            <a class="grid_action" href="#" title="Sold Out"><i class="fa fa-sign-in"></i></a>
+                                            <a class="grid_action" href="#" title="Free"><i class="fa fa-sign-in"></i></a>
                                         </td>
-                                        @*<a href="#" data-toggle="modal" class="btn btn-outline pull-right animated tada"> Free </a>*@
                                     }
                                 }
-
-
 
                             </tr>
                         }
@@ -90,40 +84,18 @@
     </div>
 </div>
 
+
 <script>
-
-    $('#modal-container').on('hidden.bs.modal', function () {
-        debugger;
-        $(this).removeData('bs.modal');
-    });
-
-    @*$('#save').click(function () {
-        var allVals = [];
-        $("input:checkbox:checked").each(function () {
-            if($(this).hasClass("check-all") || $(this).hasClass("check-group"))
-            {
-            }else{
-                allVals.push($(this).val());
-            }
-        });
-        var values = $(this).serialize();
-
-        $.ajax({
-            url: '@Url.Action("SaveRolePermissions")',
-            type: "post",
-            data: { values: allVals , id:@ViewContext.RouteData.Values["id"]},
-            success: function (response) {
-                // you will get response from your php page (what you echo or print)
-
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
+    $(function () {
+        $('#modal-container').on('shown.modal', function () {
+            alert('hiin');
         });
     });
-
-    $('.check-all').on("click",function(){
-        $('.ibox-content').find(':checkbox').prop('checked', this.checked);
-    });*@
+    $('#modal-container').on('shown.modal', function () {
+        alert('hiout');
+    });
+    $('#modal-container').on('hidden.modal', function () {
+        alert('bye');
+    });
 
 </script>

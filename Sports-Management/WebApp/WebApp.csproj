@@ -275,7 +275,6 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SportsController.cs" />
-    <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VenueController.cs" />
     <Compile Include="DBContext\IdentityDbContext.cs" />
@@ -300,6 +299,10 @@
     <Compile Include="Migrations\201709170908356_SecongMigration.cs" />
     <Compile Include="Migrations\201709170908356_SecongMigration.Designer.cs">
       <DependentUpon>201709170908356_SecongMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709180850316_ThirdMigration.cs" />
+    <Compile Include="Migrations\201709180850316_ThirdMigration.Designer.cs">
+      <DependentUpon>201709180850316_ThirdMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Events.cs" />
@@ -335,12 +338,15 @@
   <ItemGroup>
     <Content Include="assets\js\menu.js" />
     <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\css\generic-class.css" />
     <Content Include="Content\css\parallax.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\svg-weather.css" />
+    <Content Include="Content\js\bootstrap-datetimepicker.min.js" />
     <Content Include="Content\js\jquery.slimscroll.js" />
     <Content Include="Content\js\jquery.slimscroll.min.js" />
+    <Content Include="Content\js\moment.min.js" />
     <Content Include="Content\js\popover.js" />
     <Content Include="Content\plugins\notification\css\animate.min.css" />
     <Content Include="Content\css\color-1.min.css" />
@@ -481,7 +487,6 @@
     <Content Include="Views\Sports\Index.cshtml" />
     <Content Include="Views\Templates\Default\ForgotPassword.cshtml" />
     <Content Include="Views\Templates\Default\WelcomeEmail.cshtml" />
-    <Content Include="Views\Ticket\Index.cshtml" />
     <Content Include="Views\User\EditProfile.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Venue\Detail.cshtml" />
@@ -505,6 +510,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709170908356_SecongMigration.resx">
       <DependentUpon>201709170908356_SecongMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709180850316_ThirdMigration.resx">
+      <DependentUpon>201709180850316_ThirdMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -114,13 +114,7 @@ $(document).ready(function() {
 
 /*Show tooltip*/
 $('[data-toggle="tooltip"]').tooltip();
-$('[data-toggle="popover"]').popover({
-    animation: true,
-    delay: {
-        show: 100,
-        hide: 100
-    }
-});
+
 
 
 // wave effect js

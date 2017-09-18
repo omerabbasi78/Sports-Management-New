@@ -38,10 +38,16 @@
                                 <td>@item.DateCreated.ToShortDateString()</td>
 
                                 <td>
-                                    <a class="grid_action" href="@Url.Action("Activate", "User", new { id = item.Id })" onclick="return confirm('Are you sure you want to Activate?');"
-                                        title="Activate User"><i class="fa fa-unlock"></i> </a>|
-                                    <a class="grid_action" href="@Url.Action("Delete", "User", new { id = item.Id })" onclick="return confirm('Are you sure you want to De-Activate?');"
-                                       title="Block User"><i class="fa fa-lock"></i></a>
+                                    @if (!item.IsActive)
+                                    {
+                                        <a class="grid_action" href="@Url.Action("Activate", "User", new { id = item.Id })" onclick="return confirm('Are you sure you want to Activate?');"
+                                           title="Activate User"><i class="fa fa-unlock"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a class="grid_action" href="@Url.Action("Delete", "User", new { id = item.Id })" onclick="return confirm('Are you sure you want to De-Activate?');"
+                                           title="Block User"><i class="fa fa-lock"></i></a>
+                                    }   
                                 </td>
 
                             </tr>

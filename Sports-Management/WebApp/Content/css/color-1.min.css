@@ -115,3 +115,9 @@ body.body-small .footer.fixed {
 .loginscreen.middle-box {
   width: 300px;
 }
+
+
+span.field-validation-error 
+{
+    display: block;
+}

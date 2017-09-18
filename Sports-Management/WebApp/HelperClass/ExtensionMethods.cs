@@ -72,7 +72,7 @@ namespace System.Web.Mvc
 
             if (errorCount > 1)
             {
-                var ul = new TagBuilder("ul");
+                var ul = new TagBuilder("ol");
 
                 foreach (var error in errors)
                 {

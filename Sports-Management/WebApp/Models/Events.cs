@@ -41,11 +41,13 @@ namespace WebApp.Models
         public Venues Venue { get; set; }
         public int VenueId { get; set; }
 
+        [Display(Name = "Free Event")]
         [DefaultValue(true)]
         public bool IsFree { get; set; }
-        public int TotalTicketAllowed { get; set; }
+        [Display(Name = "Total Tickets")]
+        public int? TotalTickets { get; set; }
 
-        
+
         public virtual ICollection<Tickets> Ticket { get; set; }
     }
 }

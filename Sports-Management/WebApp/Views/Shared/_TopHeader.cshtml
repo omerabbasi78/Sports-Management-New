@@ -9,17 +9,17 @@
             <div class="navbar-custom-menu">
                 <ul class="top-nav">
                     @*@if (Request.Url.ToString().ToLower().Contains("/home/") || ViewContext.RouteData.Values["controller"].ToString().ToLower().Equals("home"))
-                    {
-                        <li class="active">
-                            <a href="~/Home/Index"><i class="fa fa-home"></i><span class="nav-label">Home</span></a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li>
-                            <a href="~/Home/Index"><i class="fa fa-home"></i><span class="nav-label">Home</span></a>
-                        </li>
-                    }*@
+                        {
+                            <li class="active">
+                                <a href="~/Home/Index"><i class="fa fa-home"></i><span class="nav-label">Home</span></a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="~/Home/Index"><i class="fa fa-home"></i><span class="nav-label">Home</span></a>
+                            </li>
+                        }*@
 
                     @if (Request.Url.ToString().ToLower().Contains("/events") || Request.Url.ToString().ToLower().Contains("/home/") || ViewContext.RouteData.Values["controller"].ToString().ToLower().Equals("home"))
                     {
@@ -59,33 +59,20 @@
                         </li>
                     }
 
-                    @if (WebApp.HelperClass.Common.CurrentUser.IsSuperAdmin)
-                    {
-                        if (Request.Url.ToString().ToLower().Contains("/sports"))
-                        {
-                            <li class="active">
-                                <a href="~/Sports/Index"><i class="fa fa-futbol-o"></i> <span class="nav-label">Sport</span></a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-                                <a href="~/Sports/Index"><i class="fa fa-futbol-o"></i> <span class="nav-label">Sport</span></a>
-                            </li>
-                        }
-                    }
-                    @if (Request.Url.ToString().ToLower().Contains("/ticket"))
+
+                    @if (Request.Url.ToString().ToLower().Contains("/sports"))
                     {
                         <li class="active">
-                            <a href="~/Ticket/Index"><i class="fa fa-ticket"></i> <span class="nav-label">Buy Ticket</span></a>
+                            <a href="~/Sports/Index"><i class="fa fa-futbol-o"></i> <span class="nav-label">Sport</span></a>
                         </li>
                     }
                     else
                     {
                         <li>
-                            <a href="~/Ticket/Index"><i class="fa fa-ticket"></i> <span class="nav-label">Buy Ticket</span></a>
+                            <a href="~/Sports/Index"><i class="fa fa-futbol-o"></i> <span class="nav-label">Sport</span></a>
                         </li>
                     }
+
 
 
                     @if (WebApp.HelperClass.Common.CurrentUser.IsSuperAdmin)
@@ -113,17 +100,17 @@
                         </a>
                         <ul class="dropdown-menu" id="notificationlist">
                             <li class="not-head">Your notifications.</li>
-                            <li class="bell-notification">
-                                <a href="" class="media">
-                                    <span class="media-left media-icon">
-                                        <img class="img-circle" src="/assets/images/avatar-1.png" alt="User Image">
-                                    </span>
-                                    <div class="media-body"><span class="block">Lisa sent you a mail</span><span class="text-muted block-time">2min ago</span></div>
-                                </a>
-                            </li>
-                            @*<li class="not-footer">
-                                <a href="#!">See all notifications.</a>
-                            </li>*@
+                            @*<li class="bell-notification">
+                                                                <a href="" class="media">
+                                                                    <span class="media-left media-icon">
+                                                                        <img class="img-circle" src="/assets/images/avatar-1.png" alt="User Image">
+                                                                    </span>
+                                                                    <div class="media-body"><span class="block">Lisa sent you a mail</span><span class="text-muted block-time">2min ago</span></div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="not-footer">
+                                    <a href="#!">See all notifications.</a>
+                                </li>*@
                         </ul>
                     </li>
                     <!-- User Menu-->
@@ -147,7 +134,7 @@
     </header>
 
 
-         @*//signalR*@
+    @*//signalR*@
     <script type="text/javascript" src="~/Scripts/jquery-2.1.3.min.js"></script>
     <!--Reference the SignalR library. -->
     <script type="text/javascript" src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
@@ -157,72 +144,72 @@
     <script type="text/javascript">
         $(function () {
             jQuery.noConflict();
-        // Declare a proxy to reference the hub.
-        var notification = $.connection.notificationHub;
-        // Create a function that the hub can call to broadcast messages.
-        notification.client.broadcastMessage = function (text,icon,link,image) {
-            var id=@WebApp.HelperClass.Common.CurrentUser.Id;
-            var audio = new Audio('/Content/notification_tune.mp3');
-            audio.play();
-            debugger;
-            $.notify({
-                type: 'info',
-                icon: icon,
-                message: text,
-                url: link
+            // Declare a proxy to reference the hub.
+            var notification = $.connection.notificationHub;
+            // Create a function that the hub can call to broadcast messages.
+            notification.client.broadcastMessage = function (text,icon,link,image) {
+                var id=@WebApp.HelperClass.Common.CurrentUser.Id;
+                var audio = new Audio('/Content/notification_tune.mp3');
+                audio.play();
+                debugger;
+                $.notify({
+                    type: 'info',
+                    icon: icon,
+                    message: text,
+                    url: link
+                });
+                var val=parseInt($('#hdncount').val());
+                $('#hdncount').val(val+1)
+                //$('#notificationCount').text('You have '+ $('#hdncount').val() +' New notification')
+                document.getElementById('notificationlist').innerHTML  += '<li class="bell-notification"><a href="'+link+'" class="media"><span class="media-left media-icon"><img class="img-circle" src="'+image+'" alt="User Image"></span><div class="media-body"><span class="block">'+text+'</span><span class="text-muted block-time">2min ago</span></div></a></li>';
+                $('#count').text(val+1)
+                $('#hdncount').val(val+1)
+            };
+
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                //$('#sendmessage').click(function () {
+                //    // Call the Send method on the hub.
+                //    scheduler.server.sendMessage($('#displayname').val(), $('#message').val());
+                //    // Clear text box and reset focus for next comment.
+                //    $('#message').val('').focus();
+                //});
             });
-            var val=parseInt($('#hdncount').val());
-            $('#hdncount').val(val+1)
-            //$('#notificationCount').text('You have '+ $('#hdncount').val() +' New notification')
-            $('#notificationList').prepend('<li class="bell-notification"><a href="'+link+'" class="media"><span class="media-left media-icon"><img class="img-circle" src="'+image+'" alt="User Image"></span><div class="media-body"><span class="block">'+text+'</span><span class="text-muted block-time">2min ago</span></div></a></li>')
-            $('#count').text(val+1)
-            $('#hdncount').val(val+1)
-        };
-
-        // Start the connection.
-        $.connection.hub.start().done(function () {
-            //$('#sendmessage').click(function () {
-            //    // Call the Send method on the hub.
-            //    scheduler.server.sendMessage($('#displayname').val(), $('#message').val());
-            //    // Clear text box and reset focus for next comment.
-            //    $('#message').val('').focus();
-            //});
         });
-    });
 
 
 
-    $(document).ready(function () {
-        $.get("/Chat/GetNotification",
-                function (data) {
-                    //$('#notificationCount').text('You have '+ data.count +' notification');
-                    $('#hdncount').val(data.count);
-                    $('#count').text(data.count)
-                    var d;
-                    $(data.notifications).each(function () {
-                        $('#notificationList').append('<li class="bell-notification"><a href="'+this.Link+'" class="media"><span class="media-left media-icon"><img class="img-circle" src="'+this.ProfilePic+'" alt="User Image"></span><div class="media-body"><span class="block">'+this.Notification+'</span><span class="text-muted block-time">'+this.NotificationDateString+'</span></div></a></li>')
+        $(document).ready(function () {
+            $.get("/Chat/GetNotification",
+                    function (data) {
+                        //$('#notificationCount').text('You have '+ data.count +' notification');
+                        $('#hdncount').val(data.count);
+                        $('#count').text(data.count)
+                        var d;
+                        $(data.notifications).each(function () {
+                            document.getElementById('notificationlist').innerHTML += '<li class="bell-notification"><a href="'+this.Link+'" class="media"><span class="media-left media-icon"><img class="img-circle" src="'+this.ProfilePic+'" alt="User Image" /></span><div class="media-body"><span class="block">'+this.Notification+'</span><span class="text-muted block-time">'+this.NotificationDateString+'</span></div></a></li>';
+                        });
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        //document.getElementById("loader").style.display = "none";
                     });
-                })
-                .fail(function() {
-                    console.log("error");
-                })
-                .always(function() {
-                    //document.getElementById("loader").style.display = "none";
-                });
-    });
+        });
 
-    var markRead=function(notificationId){
-        var id=notificationId;
-        $.get("/Chat/MarkReadGetNotification/"+id,
-                function (data) {
-                    window.location=data.success;
-                })
-                .fail(function() {
-                    console.log("error");
-                })
-                .always(function() {
-                    //document.getElementById("loader").style.display = "none";
-                });
-    }
+        var markRead=function(notificationId){
+            var id=notificationId;
+            $.get("/Chat/MarkReadGetNotification/"+id,
+                    function (data) {
+                        window.location=data.success;
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        //document.getElementById("loader").style.display = "none";
+                    });
+        }
     </script>
 }

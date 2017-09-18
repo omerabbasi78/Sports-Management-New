@@ -49,7 +49,7 @@ namespace WebApp.Controllers
                 VenueId=s.VenueId,
                 VenueName=s.Venue.VenueName,
                 IsFree = s.IsFree,
-                TotalTicketAllowed = s.TotalTicketAllowed,
+                TotalTickets = s.TotalTickets,
                 TotalBoughtTickets = s.Ticket.Where(w =>w.EventId == s.EventId && w.IsActive).Count()
             });
             return View(model);
@@ -67,16 +67,29 @@ namespace WebApp.Controllers
                     model = Mapper.Map<EventsViewModels>(result.data);
                 }
             }
+            else
+            {
+                model.EndDate = DateTime.Now;
+                model.StartDate = DateTime.Now;
+            }
             var sport = _sportsService.Queryable();
             var venue = _venueService.Queryable();
             model.SportsList = sport.data;
             model.VenueList = venue.data;
+            
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Detail(EventsViewModels model)
         {
+            if (model.StartDate > model.EndDate)
+            {
+                AddErrors(null, "Start date must be greater than end date");
+                model.SportsList = _sportsService.Queryable().data;
+                model.VenueList = _venueService.Queryable().data;
+                return View(model);
+            }
             Events dto = Mapper.Map<Events>(model);
             dto.ObjectState = dto.EventId > 0 ? ObjectState.Modified : ObjectState.Added;
             dto.VenueId = model.VenueId;
@@ -92,7 +105,7 @@ namespace WebApp.Controllers
             }
             else
             {
-                AddErrors(saveResult.errors, saveResult.ErrorMessage);
+                AddErrors(null, "Problem occured. Please provide valid data");
                 model.SportsList = _sportsService.Queryable().data;
                 model.VenueList = _venueService.Queryable().data;
                 return View(model);
@@ -102,7 +115,7 @@ namespace WebApp.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = _sportsService.Delete(id);
+            var result = _eventService.Delete(id);
             saveResult = _unitOfWork.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -162,9 +175,10 @@ namespace WebApp.Controllers
                 userChallenge.UserId = Common.CurrentUser.Id;
                 userChallenge.DateCreated = DateTime.Now;
                 userChallenge.ToChallengeId = model.SelectedIds[i];
-                userChallengesList.Add(userChallenge);
+                //userChallengesList.Add();
+                _challengeService.Insert(userChallenge);
             }
-            _challengeService.InsertGraphRange(userChallengesList);
+           
             saveResult= _unitOfWork.SaveChanges();
             for (int i = 0; i < model.SelectedIds.Length; i++)
             {
@@ -179,7 +193,7 @@ namespace WebApp.Controllers
                 notification.ProfilePic = Common.CurrentUser.ProfilePic==null? "/assets/images/avatar-1.png" : Common.CurrentUser.ProfilePic;
                 notificationsList.Add(notification);
             }
-            NotificationHub.SendNotification(model.SelectedIds.ToList(),  " You are challenged for event "+ model.EventName, "fa fa-plus-square fa-lg", "/Events/Detail/" + model.EventId, Common.CurrentUser.ProfilePic == null ? "/assets/images/avatar-1.png" : Common.CurrentUser.ProfilePic);
+            NotificationHub.SendNotification(model.SelectedIds.ToList(),  " You are challenged for event "+ model.EventName, "fa fa-plus-square fa-lg", "/Events/Info/" + model.EventId, Common.CurrentUser.ProfilePic == null ? "/assets/images/avatar-1.png" : Common.CurrentUser.ProfilePic);
             _notificationsService.InsertGraphRange(notificationsList);
             _unitOfWork.SaveChanges();
 

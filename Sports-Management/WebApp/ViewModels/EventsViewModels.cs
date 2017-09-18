@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,9 @@ namespace WebApp.ViewModels
         }
         public int EventId { get; set; }
         [Display(Name = "Event Name")]
+        [Required(ErrorMessage = "Event Name is required.")]
+
+
         public string EventName { get; set; }
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [Display(Name = "Date Created")]
@@ -22,18 +26,21 @@ namespace WebApp.ViewModels
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [Display(Name = "Event Start Date")]
+        [Required(ErrorMessage = "Event Start Date is required.")]
         public DateTime StartDate { get; set; }
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         [Display(Name = "Event End Date")]
+        [Required(ErrorMessage = "Event End Date is required.")]
         public DateTime EndDate { get; set; }
 
-
+        [Required(ErrorMessage = "Sport is required.")]
         public int SportId { get; set; }
         [Display(Name = "Sport Name")]
         public string SportName { get; set; }
 
         public long UserId { get; set; }
         public IEnumerable<Venues> VenueList { get; set; }
+        [Required(ErrorMessage = "Venue is required.")]
         public int VenueId { get; set; }
         
 
@@ -43,8 +50,11 @@ namespace WebApp.ViewModels
         public IEnumerable<Sports> SportsList { get; set; }
 
         public bool IsActive { get; set; }
+        [Display(Name = "Free Event")]
+        [DefaultValue(true)]
         public bool IsFree { get; set; }
-        public int TotalTicketAllowed { get; set; }
+        [Display(Name = "Total Tickets")]
+        public int? TotalTickets { get; set; }
         public int TotalBoughtTickets { get; set; }
     }
 

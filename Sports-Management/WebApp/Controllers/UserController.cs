@@ -11,7 +11,7 @@ using WebApp.Helpers;
 
 namespace WebApp.Controllers
 {
-    [SuperAdminAuthorizeAttribute]
+    
     public class UserController : BaseController
     {
         UsersManager _usermanager;
@@ -19,7 +19,7 @@ namespace WebApp.Controllers
         {
             _usermanager = new UsersManager();
         }
-
+        [SuperAdminAuthorizeAttribute]
         public ActionResult Index()
         {
             List<Users> model = new List<Users>();
@@ -49,6 +49,10 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult EditProfile(RegisterViewModel registerModel, HttpPostedFileBase FileUpload)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(registerModel);
+            }
             Result<string> result = new Result<string>();
             Users user = new Users();
             Result<long> res = new Result<long>();
@@ -73,13 +77,13 @@ namespace WebApp.Controllers
             }
             return View(registerModel);
         }
-
+        [SuperAdminAuthorizeAttribute]
         public ActionResult Delete(int id)
         {
             var result = _usermanager.Delete(id);
             return RedirectToAction("Index");
         }
-
+        [SuperAdminAuthorizeAttribute]
         public ActionResult Activate(int id)
         {
             var result = _usermanager.Activate(id);
