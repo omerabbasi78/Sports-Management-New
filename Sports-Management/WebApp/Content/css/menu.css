@@ -170,7 +170,7 @@ header .wrapper {
 .content-wrapper {
     height: 100%;
     background-color: #E5E5E5;
-    margin-left: 230px;
+    /*margin-left: 230px;*/
     z-index: 820;
     transition: all 0.3s ease-in-out;
 }

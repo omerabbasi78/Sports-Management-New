@@ -135,8 +135,10 @@ namespace WebApp.Identity
             try
             {
                 Users user = _context.User.Where(u => u.Id == userId).FirstOrDefault();
-                if (user != null)
+                Users nameUser = _context.User.Where(w => w.UserName == user.UserName && w.IsActive && w.Id != user.Id).FirstOrDefault();
+                if (user != null && nameUser==null)
                 {
+
                     user.IsActive = true;
                     _context.Entry(user).State = EntityState.Modified;
                     _context.SaveChanges();

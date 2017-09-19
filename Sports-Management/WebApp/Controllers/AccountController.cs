@@ -174,6 +174,10 @@ namespace WebApp.Controllers
        [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel model, HttpPostedFileBase file)
         {
+            if (!model.IsTeam)
+            {
+                model.TotalMembers = 0;
+            }
             if (ModelState.IsValid)
             {
                 Users user = new Users();

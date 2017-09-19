@@ -491,6 +491,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Venue\Detail.cshtml" />
     <Content Include="Views\Venue\Index.cshtml" />
+    <Content Include="Views\Shared\_chatPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
