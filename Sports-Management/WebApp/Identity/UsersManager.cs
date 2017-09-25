@@ -166,6 +166,18 @@ namespace WebApp.Identity
             return result.data;
         }
 
+        public List<Users> GetAllUsersWithoutCurrent(long id,bool team)
+        {
+            Result<List<Users>> result = userStoreService.GetAllUsersWithoutCurrent(id, team);
+            if (result.data == null)
+            {
+                result.success = false;
+                result.AddError("No user found");
+                return null;
+            }
+            return result.data;
+        }
+
         public List<Users> GetAllUsers()
         {
             Result<List<Users>> result = userStoreService.GetAllUsers();

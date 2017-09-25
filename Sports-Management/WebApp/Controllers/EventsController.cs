@@ -136,13 +136,13 @@ namespace WebApp.Controllers
             }).FirstOrDefault();
             if (model != null)
             {
-                model.ToSelectedChallengesList = _challengeService.QueryableCustom().Where(w => w.EventId == id).Select(s => new ToChallenge
+                model.ToSelectedChallengesList = _challengeService.QueryableCustom().Where(w => w.EventId == id && w.IsActive && !w.IsAccepted).Select(s => new ToChallenge
                 {
                     Name = s.ToChallenge.Name,
                     Id = (long)s.ToChallengeId
 
                 }).ToList();
-                model.ToChallengeList = manager.GetAllUsers();
+                model.ToChallengeList = manager.GetAllUsersWithoutCurrent(Common.CurrentUser.Id, Common.CurrentUser.IsTeam);
                 if (model.ToChallengeList != null)
                 {
                     model.ToChallengeList = model.ToChallengeList.Where(w => w.IsActive);

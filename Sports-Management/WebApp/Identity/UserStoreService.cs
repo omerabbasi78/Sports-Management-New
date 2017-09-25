@@ -273,6 +273,31 @@ namespace WebApp.Identity
             return result;
         }
 
+        public Result<List<Users>> GetAllUsersWithoutCurrent(long currentUserId, bool team = false)
+        {
+            Result<List<Users>> result = new Result<List<Users>>();
+            try
+            {
+                List<Users> users = new List<Users>();
+                users = _context.User.Where(u => u.IsSuperAdmin == false && u.Id != currentUserId && u.IsActive && u.IsTeam == team).OrderByDescending(i => i.Name).ToList();
+                if (users != null && users.Count > 0)
+                    result.data = users;
+                else
+                {
+                    result.success = false;
+                    result.AddError("No user found");
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                result.success = false;
+                result.AddError(ex.Message);
+            }
+            return result;
+        }
+
         public Result<List<Users>> GetAllUsers()
         {
             Result<List<Users>> result = new Result<List<Users>>();
