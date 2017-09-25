@@ -3,90 +3,41 @@
 @{
     ViewBag.Title = "Challenge Others";
 }
-<div class="modal-content">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-        <h3 class="modal-title">Challenge</h3>
-    </div>
-    @using (Html.BeginForm("Challenge", "Events", System.Web.Mvc.FormMethod.Post))
-    {
-        <div class="modal-body">
-            <div class="errormsg">
-
-            </div>
-            @Html.HiddenFor(h => h.EventId)
-            <div class="row">
-                <div role="form" class="form-horizontal">
-                    @*<div class="form-group">
-                        @Html.LabelFor(model => model.EventName, new { @class = "control-label col-sm-3" })
-                        <div class="col-sm-7">
-                            @Html.LabelFor(model => model.EventName, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.VenueName, new { @class = "control-label col-sm-3" })
-                        <div class="col-sm-7">
-                            @Html.LabelFor(model => model.VenueName, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.StartDate, new { @class = "control-label col-sm-3" })
-                        <div class="col-sm-7">
-                            @Html.LabelFor(model => model.StartDate, new { @class = "form-control" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-sm-3" })
-                        <div class="col-sm-7">
-                            @Html.LabelFor(model => model.EndDate, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.EndDate, new { @class = "control-label col-sm-3" })
-                        <div class="col-sm-7">
-                            @Html.LabelFor(model => model.EndDate, new { @class = "form-control" })
-                        </div>
-                    </div>*@
-
-                    
-                    <div class="form-group">
-                        @*<label class="control-label col-sm-3">To Challenge</label>*@
-                        <lable class="control-label col-sm-12">Press Ctrl and select the opponents for <b>@Model.EventName</b> Event.</lable><br />
-                        <div class="col-sm-12">
-                            @Html.ListBox("SelectedIds", new MultiSelectList(Model.ToChallengeList, "Id", "Name"), new { @class="form-control"})
-                        </div>
-                    </div>
-
-                    @*<span class="select2 select2-container select2-container--default select2-container--above select2-container--focus" dir="ltr" style="width: 75.3438px;">
-                            <span class="selection">
-                                <span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1">
-                                    <ul class="select2-selection__rendered">
-                                        <li class="select2-selection__choice" title="Alabama"><span class="select2-selection__choice__remove" role="presentation">×</span>Alabama</li>
-                                        <li class="select2-selection__choice" title="Wyoming"><span class="select2-selection__choice__remove" role="presentation">×</span>Wyoming</li>
-                                        <li class="select2-selection__choice" title="Coming"><span class="select2-selection__choice__remove" role="presentation">×</span>Coming</li>
-                                        <li class="select2-search select2-search--inline">
-                                            <input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;">
-                                        </li>
-                                    </ul>
-                                </span>
-                            </span>
-                            <span class="dropdown-wrapper" aria-hidden="true"></span>
-                        </span>*@
-
-                    @*<div class="form-group">
-                            @Html.LabelFor(model => model.limit_value, new { @class = "control-label col-sm-3" })
-                            <div class="col-sm-7">
-                                @Html.EditorFor(model => model.limit_value, new { htmlAttributes = new { @class = "form-control", @id = "txtLimitVal", disabled = "disabled" } })
-                            </div>
-                        </div>*@
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-footer">
-            <button type="submit" value="Create" class="btn btn-primary btn-sm">Save</button>
-            <input type="button" value="Close" data-dismiss="modal" class="btn btn-white btn-sm">
-        </div>
-    }
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+    <h3 class="modal-title">Challenge</h3>
 </div>
+@using (Html.BeginForm("Challenge", "Events", System.Web.Mvc.FormMethod.Post))
+{
+    <div class="modal-body">
+        <div class="errormsg">
+
+        </div>
+        @Html.HiddenFor(h => h.EventId)
+        <div class="row">
+            <div role="form" class="form-horizontal">
+
+                <div class="form-group">
+                    <lable class="control-label col-sm-12">Press Ctrl and select the opponents for <b>@Model.EventName</b> Event.</lable><br />
+                    <div class="col-sm-12">
+                        @if (Model.ToChallengeList != null && Model.ToChallengeList.Count() > 0)
+                        {
+                            @Html.ListBox("SelectedIds", new MultiSelectList(Model.ToChallengeList, "Id", "Name"), new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            <p class="alert alert-danger" style="text-align: -webkit-center;">No User to Challenge</p>
+                        }
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit" value="Create" class="btn btn-primary btn-sm">Save</button>
+        <input type="button" value="Close" data-dismiss="modal" class="btn btn-white btn-sm">
+    </div>
+}

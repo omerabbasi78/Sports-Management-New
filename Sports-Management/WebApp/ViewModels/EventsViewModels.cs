@@ -56,6 +56,8 @@ namespace WebApp.ViewModels
         [Display(Name = "Total Tickets")]
         public int? TotalTickets { get; set; }
         public int TotalBoughtTickets { get; set; }
+
+        public bool IsTicketPurchased { get; set;}
     }
 
     public class ChallengeEvent

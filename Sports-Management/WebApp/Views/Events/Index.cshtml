@@ -1,4 +1,5 @@
-﻿@model IEnumerable<EventsViewModels>
+﻿@using PagedList.Mvc 
+@model PagedList.IPagedList<EventsViewModels>
 @{
     ViewBag.Title = "Events";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -49,9 +50,19 @@
                                 {
                                     if (!item.IsFree && item.TotalBoughtTickets < item.TotalTickets)
                                     {
-                                        <td>
-                                            <a class="grid_action" href="@Url.Action("Buy", "Tickets", new { id = item.EventId })" data-toggle="modal" title="Buy Ticket"><i class="fa fa-ticket"></i></a>
-                                        </td>
+                                        if (item.IsTicketPurchased)
+                                        {
+                                            <td>
+                                                <a class="grid_action" href="#" title="Ticket Bought Already"><i class="fa fa-shopping-cart"></i></a>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <a class="grid_action" href="@Url.Action("Buy", "Tickets", new { id = item.EventId })" data-toggle="modal" title="Buy Ticket"><i class="fa fa-ticket"></i></a>
+                                            </td>
+                                        }
+
                                     }
                                     else if (!item.IsFree && item.TotalBoughtTickets >= item.TotalTickets)
                                     {
@@ -71,31 +82,34 @@
                         }
                     </tbody>
                 </table>
+
+                <div id="pager" class="text-right">
+                    <p> Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                </div>
             }
         </div>
     </div>
 </div>
 
-
-<div class="modal" id="modal-container" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+@*<div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content animated bounceInRight">
         </div>
     </div>
 </div>
 
-
 <script>
-    $(function () {
-        $('#modal-container').on('shown.modal', function () {
-            alert('hiin');
+        $(function () {
+            $('#modal-container').on('shown.modal', function () {
+                alert('hiin');
+            });
         });
-    });
-    $('#modal-container').on('shown.modal', function () {
-        alert('hiout');
-    });
-    $('#modal-container').on('hidden.modal', function () {
-        alert('bye');
-    });
+        $('#modal-container').on('shown.modal', function () {
+            alert('hiout');
+        });
+        $('#modal-container').on('hidden.modal', function () {
+            alert('bye');
+        });
 
-</script>
+    </script>*@

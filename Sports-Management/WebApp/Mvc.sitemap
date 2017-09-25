@@ -13,6 +13,8 @@
       <mvcSiteMapNode title="Add Sport" controller="Sports" action="Detail"/>
     </mvcSiteMapNode>
     <mvcSiteMapNode title="Users" controller="User" action="Index"/>
+    <mvcSiteMapNode title="Buy Ticket" controller="Tickets" action="Buy" preservedRouteParameters="id"/>
+    <mvcSiteMapNode title="Event Detail" controller="Events" action="Info" preservedRouteParameters="id"/>
   </mvcSiteMapNode>
 
 </mvcSiteMap>

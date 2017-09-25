@@ -166,9 +166,9 @@ namespace WebApp.Identity
             return result.data;
         }
 
-        public List<Users> GetAllUsersWithoutCurrent(long id,bool team)
+        public List<Users> GetAllUsersWithoutCurrent(int eventId, long id,bool team)
         {
-            Result<List<Users>> result = userStoreService.GetAllUsersWithoutCurrent(id, team);
+            Result<List<Users>> result = userStoreService.GetAllUsersWithoutCurrent(eventId, id, team);
             if (result.data == null)
             {
                 result.success = false;

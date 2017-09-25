@@ -273,13 +273,20 @@ namespace WebApp.Identity
             return result;
         }
 
-        public Result<List<Users>> GetAllUsersWithoutCurrent(long currentUserId, bool team = false)
+        public Result<List<Users>> GetAllUsersWithoutCurrent(int EventID, long currentUserId, bool team = false)
         {
             Result<List<Users>> result = new Result<List<Users>>();
             try
             {
                 List<Users> users = new List<Users>();
                 users = _context.User.Where(u => u.IsSuperAdmin == false && u.Id != currentUserId && u.IsActive && u.IsTeam == team).OrderByDescending(i => i.Name).ToList();
+                var toRemoveUserIds = _context.UserChallenges.Where(w => w.EventId == EventID && w.IsActive).Select(s => new {
+                    id = s.ToChallengeId
+                }).ToList(); // && !w.IsAccepted && w.User.IsSuperAdmin == false && w.User.Id != currentUserId && w.User.IsActive && w.User.IsTeam == team
+                foreach (var item in toRemoveUserIds)
+                {
+                    users.RemoveAll(ra => ra.Id == item.id);
+                }
                 if (users != null && users.Count > 0)
                     result.data = users;
                 else
