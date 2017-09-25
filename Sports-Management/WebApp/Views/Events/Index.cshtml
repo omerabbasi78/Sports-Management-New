@@ -50,7 +50,7 @@
                                     if (!item.IsFree && item.TotalBoughtTickets < item.TotalTickets)
                                     {
                                         <td>
-                                            <a class="grid_action" href="@Url.Action("Challenge", "Events", new { id = item.EventId })" data-toggle="modal" title="Buy Ticket"><i class="fa fa-ticket"></i></a>
+                                            <a class="grid_action" href="@Url.Action("Buy", "Tickets", new { id = item.EventId })" data-toggle="modal" title="Buy Ticket"><i class="fa fa-ticket"></i></a>
                                         </td>
                                     }
                                     else if (!item.IsFree && item.TotalBoughtTickets >= item.TotalTickets)

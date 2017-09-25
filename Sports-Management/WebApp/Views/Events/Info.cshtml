@@ -3,22 +3,45 @@
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Detail</h2>
-@using (Html.BeginForm())
-{
-    <div>
-        @Html.HiddenFor(model => model.EventId)
-        @Html.HiddenFor(model => model.UserId)
-        @Html.HiddenFor(model => model.DateCreated)
-        @Html.HiddenFor(model => model.IsActive)
-
-        Name:
-        @Html.EditorFor(model => model.EventName)
-        Start Date:
-        @Html.EditorFor(model => model.StartDate)
-        End Date:
-        @Html.EditorFor(model => model.EndDate)
+<div class="card">
+    <div class="card-header m-b-md">
+        <h5>Ticket</h5>
     </div>
-    <button type="submit">Accept Challenge</button>
-}
+    <div class="card-block">
+        @using (Html.BeginForm())
+        {
+            <div>
+                @Html.HiddenFor(model => model.EventId)
+                @Html.HiddenFor(model => model.UserId)
+                @Html.HiddenFor(model => model.DateCreated)
+                @Html.HiddenFor(model => model.IsActive)
+
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.EventName, new { @class = "col-sm-2 col-form-label form-control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.EventName, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.StartDate, new { @class = "col-sm-2 col-form-label form-control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    @Html.LabelFor(m => m.EndDate, new { @class = "col-sm-2 col-form-label form-control-label" })
+                    <div class="col-sm-10">
+                        @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-7">
+                        <input type="submit" class="btn btn-primary" value="Accept Challenge" />
+                        <a href="/Events/Index" type="button" class="btn btn-default">Cancel</a>
+                    </div>
+                </div>
+            </div>
+            
+        }
+    </div>
+</div>

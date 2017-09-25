@@ -12,5 +12,16 @@ namespace WebApp.Models
         public int EventId { get; set; }
         [ForeignKey("EventId")]
         public Events Event { get; set; }
+        public long? UserId { get; set; }
+        [ForeignKey("UserId")]
+        public Users User { get; set; }
+        [Required]
+        public string CardNumber { get; set; }
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        [Required]
+        public string Address { get; set; }
     }
 }
